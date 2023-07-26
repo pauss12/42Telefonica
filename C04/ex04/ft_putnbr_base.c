@@ -6,7 +6,7 @@
 /*   By: pmendez- <pmendez-@student42.madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 11:29:43 by pmendez-          #+#    #+#             */
-/*   Updated: 2023/07/19 20:13:06 by pmendez-         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:42:07 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,53 +26,52 @@ int	ft_strlen(char *str)
 
 int	checkbase(char *base)
 {
-	int contador;
-	int contador1;
-	int	i;
+	int	contador;
+	int	contador1;
 
 	contador = 0;
 	if ((base == NULL) || (ft_strlen(base) == 1))
-	{
 		return (0);
-	}
-
 	while (contador < ft_strlen(base))
 	{
 		contador1 = contador + 1;
 		while (contador1 < ft_strlen(base))
 		{
 			if (base[contador] == base[contador1])
-				return (0);			
+				return (0);
+			contador1++;
 		}
-	}
-	
-	while (base[i] == "+" || base[i] == "-")
-	   return (0);
-
-	return (1);	
-
+		if (base[contador] == '+' || base[contador] == '-')
+			return (0);
+		contador ++;
+	}	
+	return (1);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int	num;
-	int	res;
 
-	res = 0;
-	if (checkbase(base)  == 1)
+	if (checkbase(base))
 	{
 		num = ft_strlen(base);
+		if (nbr < 0)
+		{
+			write(1, "-", 1);
+			nbr = -nbr;
+		}
 		if (nbr < num)
-			write(1 , &base[nbr], 1);	
+			write(1, &base[nbr], 1);
 		else
 		{
-			ft_putnbr_base(nbr/num ,base);
-			ft_putnbr_base(nbr%num ,base);
+			ft_putnbr_base(nbr / num, base);
+			ft_putnbr_base(nbr % num, base);
 		}
 	}
 }
-
+/*
 int	main(void)
 {
-	 ft_putnbr_base(12, "0123456789ABCDEF");
+	 ft_putnbr_base(0, "01");
 }
+*/
