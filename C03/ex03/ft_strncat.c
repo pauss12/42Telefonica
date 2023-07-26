@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pmendez- <pmendez-@student42.madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 15:05:50 by pmendez-          #+#    #+#             */
-/*   Updated: 2023/07/23 12:13:00 by pmendez-         ###   ########.fr       */
+/*   Created: 2023/07/17 11:15:53 by pmendez-          #+#    #+#             */
+/*   Updated: 2023/07/20 10:44:21 by pmendez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
 #include <stdio.h>
 
-int	ft_strcmp(char *s1, char *s2)
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	int	i;
+	int				tamdest;
+	unsigned int	tam;
 
-	i = 0;
-	while (s1[i] == s2[i])
+	tamdest = 0;
+	tam = 0;
+	while (dest[tamdest] != '\0')
 	{
-		if (s1[i] == '\0' || s2[i] == '\0' )
-		{
-			return (0);
-		}
-		i++;
+		tamdest++;
+	}	
+	while (src[tam] != '\0' && tam < nb)
+	{
+		dest[tamdest] = src[tam];
+		tam++;
+		tamdest++;
 	}
-	return (s1[i] - s2[i]);
+	dest[tamdest] = '\0';
+	return (dest);
 }
-/*
-int main()
-{
-	int numero;
-
-	numero = 0;
-	numero = ft_strcmp("Hola", "hola");
-	printf("%d\n", numero);
-	return (0);
-}
-*/
